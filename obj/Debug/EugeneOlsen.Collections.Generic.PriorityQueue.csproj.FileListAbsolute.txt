@@ -1,0 +1,5 @@
+C:\Users\Eugene\source\repos\EugeneOlsen.Collections.Generic.PriorityQueue\bin\Debug\EugeneOlsen.Collections.Generic.PriorityQueue.dll
+C:\Users\Eugene\source\repos\EugeneOlsen.Collections.Generic.PriorityQueue\bin\Debug\EugeneOlsen.Collections.Generic.PriorityQueue.pdb
+C:\Users\Eugene\source\repos\EugeneOlsen.Collections.Generic.PriorityQueue\obj\Debug\EugeneOlsen.Collections.Generic.PriorityQueue.csprojAssemblyReference.cache
+C:\Users\Eugene\source\repos\EugeneOlsen.Collections.Generic.PriorityQueue\obj\Debug\EugeneOlsen.Collections.Generic.PriorityQueue.dll
+C:\Users\Eugene\source\repos\EugeneOlsen.Collections.Generic.PriorityQueue\obj\Debug\EugeneOlsen.Collections.Generic.PriorityQueue.pdb
