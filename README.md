@@ -12,5 +12,8 @@ the Dequeue method entirely.
 
 Departing from Dr. McCaffrey's original code, I calculate parent-child relationships with ordinals rather than indices.  
 Knuth defines a Heap structure as a file [or array] of keys, K<sub>1</sub>, K<sub>2</sub>, ..., K<sub>N</sub> 
-if K<sub>[j/2]</sub> <= K<sub>j</sub> for 1 &le; j/2 < j &le; N, where *j* is the 1-based ordinal key position in the file or array. 
+if K<sub>[j/2]</sub> &le; K<sub>j</sub> for 1 &le; j/2 < j &le; N, where *j* is the 1-based ordinal key position in the file or array. 
 To convert the 1-based ordinal key position to a 0-based array index, we simply subtract 1 from the ordinal.
+
+The PriorityQueue<T> class implements the IPriorityQueue<T> interface.  It will create a PriorityQueue of any type T that 
+implements the IComparable interface.  Fortunately, this includes native C# types such as int, double, and string.
