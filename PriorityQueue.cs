@@ -91,6 +91,16 @@ namespace EugeneOlsen.Collections.Generic
             }
         }
 
+        public T Peek()
+        {
+            if (0 == base.Count)
+            {
+                return default(T);
+            }
+
+            return base[0];
+        }
+
         public T Dequeue()
         {
             if (0 == base.Count)

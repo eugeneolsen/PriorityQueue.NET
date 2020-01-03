@@ -9,6 +9,9 @@ namespace EugeneOlsen.Collections.Generic
     public interface IPriorityQueue<T> : IBindingList where T : IComparable<T>
     {
         void Enqueue(T item);
+
+        T Peek();
+
         T Dequeue();
 
         IList<T> Items { get; }
