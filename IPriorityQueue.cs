@@ -8,6 +8,8 @@ namespace EugeneOlsen.Collections.Generic
 {
     public interface IPriorityQueue<T> : IBindingList where T : IComparable<T>
     {
+        event EventHandler<QueueEmptyEventArgs> QueueEmptyEvent;
+
         void Enqueue(T item);
 
         T Peek();

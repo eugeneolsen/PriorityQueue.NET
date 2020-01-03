@@ -22,7 +22,7 @@ namespace EugeneOlsen.Collections.Generic
     /// Where:
     /// <code>
     /// K is a key
-    /// j is an ordinal position in the array
+    /// j is an ordinal position of a key in the array
     /// N is the size of the array
     /// </code>
     /// </example>
@@ -38,6 +38,20 @@ namespace EugeneOlsen.Collections.Generic
 
             base.RaiseListChangedEvents = false;       // We will raise these events manually when Enqueue and Dequeue are complete.
         }
+
+        private PriorityQueue(PriorityQueue<T> priorityQueue)
+        {
+            _heapOrder = priorityQueue.HeapOrder;
+
+            base.RaiseListChangedEvents = false;       // Raise ListChanged events manually when Enqueue and Dequeue are complete.
+
+            foreach (T item in base.Items)
+            {
+                this.Add(item);
+            }
+        }
+
+        public event EventHandler<QueueEmptyEventArgs> QueueEmptyEvent;
 
         IList<T> IPriorityQueue<T>.Items => base.Items;
 
@@ -85,9 +99,12 @@ namespace EugeneOlsen.Collections.Generic
             }
             else
             {
-                Debug.Assert(false, "Enqueue did not result in a properly formed Heap structure.");
-                // TODO: Create class HeapException
-                // TODO: Raise heap exception in release builds
+                string message = "Enqueue did not create a properly formed Heap structure.  Contact the developer and have input ready.";
+#if DEBUG
+                Debug.Assert(false, message);
+#else
+                throw new HeapException(message);
+#endif
             }
         }
 
@@ -99,6 +116,12 @@ namespace EugeneOlsen.Collections.Generic
             }
 
             return base[0];
+        }
+
+
+        public IPriorityQueue<T> Copy()
+        {
+            return new PriorityQueue<T>(this);
         }
 
         public T Dequeue()
@@ -130,12 +153,17 @@ namespace EugeneOlsen.Collections.Generic
             }
             else
             {
-                Debug.Assert(false, "Dequeue did not result in a properly formed Heap structure.");
+                string message = "Dequeue did not create a properly formed Heap structure.  Contact the developer and have input ready.";
+#if DEBUG
+                Debug.Assert(false, message);
+#else
+                throw new HeapException(message);
+#endif
             }
 
             if (base.Count == 0)
             {
-                // TODO: Raise a PriorityQueueEmpty event with PriorityQueueEmptyEventArgs including the swap count and comparison count
+                OnRaiseQueueEmptyEvent(new QueueEmptyEventArgs(_comparisons, _swaps));
 
                 _swaps = 0;
                 _comparisons = 0;
@@ -237,6 +265,13 @@ namespace EugeneOlsen.Collections.Generic
             base[index2] = temp;
 
             _swaps++;
+        }
+
+        protected virtual void OnRaiseQueueEmptyEvent(QueueEmptyEventArgs e)
+        {
+            EventHandler<QueueEmptyEventArgs> handler = QueueEmptyEvent;
+
+            handler?.Invoke(this, e);
         }
     }
 

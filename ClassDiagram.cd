@@ -3,20 +3,34 @@
   <Class Name="EugeneOlsen.Collections.Generic.PriorityQueue&lt;T&gt;" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="3.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AABACoAAAAAAAAAAAAAAEAAAAAABBAAAAAEAAABIAKA=</HashCode>
+      <HashCode>AABACoAAAAAEAAAAAAAAEAAAAgABBAAAAAEAAABIIKA=</HashCode>
       <FileName>PriorityQueue.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="EugeneOlsen.HeapException">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HeapException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EugeneOlsen.Collections.Generic.QueueEmptyEventArgs">
+    <Position X="3.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>QueueEmptyEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="EugeneOlsen.Collections.Generic.IPriorityQueue&lt;T&gt;">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAAACAAACAAAAAAAAAAABAAAAAAAAABIAAA=</HashCode>
+      <HashCode>AABAAAAAAAAECAAACAAAAAAAAAAABAAAAAAAAABIAAA=</HashCode>
       <FileName>IPriorityQueue.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="EugeneOlsen.Collections.Generic.HeapOrder">
-    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Position X="3.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PriorityQueue.cs</FileName>
