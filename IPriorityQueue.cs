@@ -20,6 +20,8 @@ namespace EugeneOlsen.Collections.Generic
 
         HeapOrder HeapOrder { get; }
 
+        BindingList<T> SortedList { get; }
+
         new T this[int index] { get; }
 
         new void Clear();

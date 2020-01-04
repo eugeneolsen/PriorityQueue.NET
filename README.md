@@ -2,8 +2,7 @@
 Generic Priority Queue for the .NET Framework
 
 Starting with ideas and code from Dr. James McCaffrey in a *Visual Studio Magazine* 
-[article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#") 
-(11/02/2012), and finding that 
+[article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#"), and finding that 
 the sample code did not always dequeue in priority order, I consulted Donald Knuth's *Sorting and Searching* (Volume 3 of
 *The Art of Computer Programming* series) for correct construction of Heap structures, Heap Sort, and Priority Queues.
 

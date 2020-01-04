@@ -39,21 +39,32 @@ namespace EugeneOlsen.Collections.Generic
             base.RaiseListChangedEvents = false;       // We will raise these events manually when Enqueue and Dequeue are complete.
         }
 
+
+
+        /// <summary>
+        /// Copy constructor
+        /// 
+        /// Makes a shallow copy of the Priority Queue passed in as a parameter
+        /// </summary>
+        /// <param name="priorityQueue">The source Priority Queue for the copy.</param>
         private PriorityQueue(PriorityQueue<T> priorityQueue)
         {
             _heapOrder = priorityQueue.HeapOrder;
 
             base.RaiseListChangedEvents = false;       // Raise ListChanged events manually when Enqueue and Dequeue are complete.
 
-            foreach (T item in base.Items)
+            foreach (T item in priorityQueue.Items)
             {
                 this.Add(item);
             }
         }
 
+
         public event EventHandler<QueueEmptyEventArgs> QueueEmptyEvent;
 
+
         IList<T> IPriorityQueue<T>.Items => base.Items;
+
 
         // Performance metrics
         private int _swaps;             // Counter for number of swaps in all Enqueue and Dequeue operations
@@ -63,6 +74,28 @@ namespace EugeneOlsen.Collections.Generic
         private HeapOrder _heapOrder;
 
         public HeapOrder HeapOrder => _heapOrder;
+
+        public BindingList<T> SortedList
+        {
+            get
+            {
+                BindingList<T> sortedList = new BindingList<T>();
+
+                IPriorityQueue<T> newQueue = this.Copy();
+
+                if (newQueue.Count == 0)
+                {
+                    return default;
+                }
+
+                while (newQueue.Count > 0)
+                {
+                    sortedList.Add(newQueue.Dequeue());
+                }
+
+                return sortedList;
+            }
+        }
 
         /// <summary>
         /// Enqueue
@@ -119,6 +152,12 @@ namespace EugeneOlsen.Collections.Generic
         }
 
 
+        /// <summary>
+        /// Copy
+        /// 
+        /// Makes a shallow copy of this Priority Queue
+        /// </summary>
+        /// <returns></returns>
         public IPriorityQueue<T> Copy()
         {
             return new PriorityQueue<T>(this);
