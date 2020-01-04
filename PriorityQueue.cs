@@ -5,12 +5,6 @@ using System.Diagnostics;
 
 namespace EugeneOlsen.Collections.Generic
 {
-    public enum HeapOrder
-    {
-        MinHeap = 0,
-        MaxHeap = 1
-    }
-
     public enum PriorityOrder
     {
         Ascending = 0,
