@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace EugeneOlsen.Collections.Generic
 {
@@ -16,9 +14,11 @@ namespace EugeneOlsen.Collections.Generic
 
         T Dequeue();
 
+        bool IsEmpty { get; }
+
         IList<T> Items { get; }
 
-        HeapOrder HeapOrder { get; }
+        PriorityOrder PriorityOrder { get; }
 
         BindingList<T> SortedList { get; }
 

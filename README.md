@@ -3,6 +3,13 @@ Generic Priority Queue for the .NET Framework
 
 The use of this software is subject to the terms of the [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL)
 
+A Priority Queue is a data structure like a queue, with the additional feature that each item in the queue 
+has a priority and the highest priority item in the queue is dequeued first, then the next highest priority,
+and so forth.  The top priority may be defined as the highest or the lowest value.
+
+Many Priority Queues, including this one, are built on a Heap structure.  In so doing, the Priority Queue can 
+be considered as a one-step-at-a-time Heap Sort.  Indeed, Enqueuing the elements of an unsorted list and then repeatedly Dequeuing until the Priority Queue is empty yields a sorted list.
+
 Starting with ideas and code from Dr. James McCaffrey in a *Visual Studio Magazine* 
 [article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#"), and finding that 
 the sample code did not always dequeue in priority order, I consulted Donald Knuth's *Sorting and Searching* (Volume 3 of

@@ -11,6 +11,12 @@ namespace EugeneOlsen.Collections.Generic
         MaxHeap = 1
     }
 
+    public enum PriorityOrder
+    {
+        Ascending = 0,
+        Descending = 1
+    }
+
     /// <summary>
     /// PriorityQueue
     /// 
@@ -32,9 +38,9 @@ namespace EugeneOlsen.Collections.Generic
     /// <typeparam name="T">Creates a priority queue of any class T that implements IComparable.CompareTo</typeparam>
     public class PriorityQueue<T> : BindingList<T>, IPriorityQueue<T> where T : IComparable<T>
     {
-        public PriorityQueue(HeapOrder order = HeapOrder.MinHeap)
+        public PriorityQueue(PriorityOrder order = PriorityOrder.Ascending)
         {
-            _heapOrder = order;
+            PriorityOrder = order;
 
             base.RaiseListChangedEvents = false;       // We will raise these events manually when Enqueue and Dequeue are complete.
         }
@@ -49,7 +55,7 @@ namespace EugeneOlsen.Collections.Generic
         /// <param name="priorityQueue">The source Priority Queue for the copy.</param>
         private PriorityQueue(PriorityQueue<T> priorityQueue)
         {
-            _heapOrder = priorityQueue.HeapOrder;
+            PriorityOrder = priorityQueue.PriorityOrder;
 
             base.RaiseListChangedEvents = false;       // Raise ListChanged events manually when Enqueue and Dequeue are complete.
 
@@ -65,15 +71,14 @@ namespace EugeneOlsen.Collections.Generic
 
         IList<T> IPriorityQueue<T>.Items => base.Items;
 
+        public bool IsEmpty { get => base.Count == 0; }
+
 
         // Performance metrics
         private int _swaps;             // Counter for number of swaps in all Enqueue and Dequeue operations
         private int _comparisons;       // Counter for number of comparisions in all Enqueue and Dequeue operations
 
-        // Min Heap or Max Heap
-        private HeapOrder _heapOrder;
-
-        public HeapOrder HeapOrder => _heapOrder;
+        public PriorityOrder PriorityOrder { get; }
 
         public BindingList<T> SortedList
         {
@@ -116,12 +121,12 @@ namespace EugeneOlsen.Collections.Generic
                 T parentNode = base[parentOrdinal - 1];
                 T childNode = base[childOrdinal - 1];
 
-                if (!HeapOrderCompare(parentNode.CompareTo(childNode)))
+                if (!PriorityCompare(parentNode.CompareTo(childNode)))
                 {
                     break;  // If it's already in priority order, we have no work left to do.
                 }
 
-                Swap(parentOrdinal - 1, childOrdinal - 1);
+                SwapNodes(parentOrdinal - 1, childOrdinal - 1);
 
                 childOrdinal = parentOrdinal;   // Make the parent the new child
             }
@@ -130,22 +135,13 @@ namespace EugeneOlsen.Collections.Generic
             {
                 base.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, 0));
             }
-            else
-            {
-                string message = "Enqueue did not create a properly formed Heap structure.  Contact the developer and have input ready.";
-#if DEBUG
-                Debug.Assert(false, message);
-#else
-                throw new HeapException(message);
-#endif
-            }
         }
 
         public T Peek()
         {
             if (0 == base.Count)
             {
-                return default(T);
+                return default;
             }
 
             return base[0];
@@ -167,7 +163,7 @@ namespace EugeneOlsen.Collections.Generic
         {
             if (0 == base.Count)
             {
-                return default(T);
+                return default;
             }
 
             int lastIndex = base.Count - 1;
@@ -189,15 +185,6 @@ namespace EugeneOlsen.Collections.Generic
             if (IsHeap())
             {
                 base.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, 0));
-            }
-            else
-            {
-                string message = "Dequeue did not create a properly formed Heap structure.  Contact the developer and have input ready.";
-#if DEBUG
-                Debug.Assert(false, message);
-#else
-                throw new HeapException(message);
-#endif
             }
 
             if (base.Count == 0)
@@ -222,9 +209,11 @@ namespace EugeneOlsen.Collections.Generic
 
             while (childOrdinal > rootOrdinal && parentOrdinal > 0)
             {
-                if (HeapOrderCompare(base[parentOrdinal - 1].CompareTo(base[childOrdinal - 1])))
+                if (PriorityCompare(base[parentOrdinal - 1].CompareTo(base[childOrdinal - 1])))
                 {
-                    return false;
+                    string message = $"Parent {base[parentOrdinal - 1].ToString()} index {parentOrdinal - 1} is not higher priority than child {base[childOrdinal - 1].ToString()} index {childOrdinal - 1}";
+
+                    throw new HeapException(message);
                 }
 
                 childOrdinal--;
@@ -257,10 +246,10 @@ namespace EugeneOlsen.Collections.Generic
             T parentNode = base[parentIndex];       // This makes debugging easier
             T leftChildNode = base[leftChildIndex];
 
-            if (HeapOrderCompare(parentNode.CompareTo(leftChildNode)))
+            if (PriorityCompare(parentNode.CompareTo(leftChildNode)))
             {
                 Debug.WriteLine($"Swapping parent {parentNode.ToString()} with left child {leftChildNode.ToString()}");
-                Swap(parentIndex, leftChildIndex);
+                SwapNodes(parentIndex, leftChildIndex);
 
                 Traverse(leftChild);
             }
@@ -274,20 +263,20 @@ namespace EugeneOlsen.Collections.Generic
             int rightChildIndex = rightChild - 1;       // This makes debugging easier
             T rightChildNode = base[rightChildIndex];
 
-            if (HeapOrderCompare(parentNode.CompareTo(rightChildNode)))
+            if (PriorityCompare(parentNode.CompareTo(rightChildNode)))
             {
                 Debug.WriteLine($"Swapping parent {parentNode.ToString()} with right child {rightChildNode.ToString()}");
-                Swap(parentIndex, rightChildIndex);
+                SwapNodes(parentIndex, rightChildIndex);
 
                 Traverse(rightChild);
             }
         }
 
-        private bool HeapOrderCompare(int compareResult)
+        private bool PriorityCompare(int compareResult)
         {
             _comparisons++;
 
-            if (_heapOrder == HeapOrder.MinHeap)
+            if (PriorityOrder == PriorityOrder.Ascending)
             {
                 return compareResult > 0;
             }
@@ -297,7 +286,7 @@ namespace EugeneOlsen.Collections.Generic
             }
         }
 
-        private void Swap(int index1, int index2)
+        private void SwapNodes(int index1, int index2)
         {
             T temp = base[index1];
             base[index1] = base[index2];
