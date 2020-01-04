@@ -1,6 +1,8 @@
 # PriorityQueue.NET
 Generic Priority Queue for the .NET Framework
 
+The use of this software is subject to the terms of the [Microsoft Public License (MS-PL)](https://opensource.org/licenses/MS-PL)
+
 Starting with ideas and code from Dr. James McCaffrey in a *Visual Studio Magazine* 
 [article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#"), and finding that 
 the sample code did not always dequeue in priority order, I consulted Donald Knuth's *Sorting and Searching* (Volume 3 of
@@ -16,3 +18,6 @@ To convert the 1-based ordinal key position to a 0-based array index, we simply 
 
 The PriorityQueue<T> class implements the IPriorityQueue<T> interface.  It will create a PriorityQueue of any type T that 
 implements the IComparable interface.  Fortunately, this includes native C# types such as int, double, and string.
+  
+
+&copy; 2020 Eugene C. Olsen
