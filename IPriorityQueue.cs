@@ -16,6 +16,8 @@ namespace EugeneOlsen.Collections.Generic
 
         bool IsEmpty { get; }
 
+        Diagnostics Diagnostics { get; set; }
+
         IList<T> Items { get; }
 
         PriorityOrder PriorityOrder { get; }

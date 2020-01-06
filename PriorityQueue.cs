@@ -11,10 +11,16 @@ namespace EugeneOlsen.Collections.Generic
         Descending = 1
     }
 
+    public enum Diagnostics
+    {
+        Off = 0,
+        On = 1
+    }
+
     /// <summary>
     /// PriorityQueue
     /// 
-    /// Generic Priority Queue
+    /// Generic Priority Queue class
     /// <para>A priority queue is a heap structure.  Donald Knuth defines a heap structure as a tree, which can be implemented as an
     /// array of keys (and optionally associated records) in which K[j/2] &lt;= K[j] for an ascending or "min heap" or
     /// K[j/2] &gt;= K[j] for a descending or "max heap", for 1 &lt;= [j/2] &lt; j &;lt= N</para>
@@ -37,6 +43,12 @@ namespace EugeneOlsen.Collections.Generic
             PriorityOrder = order;
 
             base.RaiseListChangedEvents = false;       // We will raise these events manually when Enqueue and Dequeue are complete.
+
+#if DEBUG
+            Diagnostics = Diagnostics.On;
+#else
+            Diagnostics = Diagnostics.Off;
+#endif
         }
 
 
@@ -66,6 +78,8 @@ namespace EugeneOlsen.Collections.Generic
         IList<T> IPriorityQueue<T>.Items => base.Items;
 
         public bool IsEmpty { get => base.Count == 0; }
+
+        public Diagnostics Diagnostics { get; set; }
 
 
         // Performance metrics
@@ -183,7 +197,10 @@ namespace EugeneOlsen.Collections.Generic
 
             if (base.Count == 0)
             {
-                OnRaiseQueueEmptyEvent(new QueueEmptyEventArgs(_comparisons, _swaps));
+                if (Diagnostics.On == Diagnostics)
+                {
+                    OnRaiseQueueEmptyEvent(new QueueEmptyEventArgs(_comparisons, _swaps));
+                }
 
                 _swaps = 0;
                 _comparisons = 0;
@@ -194,6 +211,11 @@ namespace EugeneOlsen.Collections.Generic
 
         private bool IsHeap()
         {
+            if (Diagnostics.Off == Diagnostics)
+            {
+                return true;   // bypass the Heap integrity check. 
+            }
+
             // Check the List and make sure it's a Heap
             int childOrdinal = this.Count;
 
