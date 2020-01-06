@@ -10,6 +10,11 @@ and so forth.  The top priority may be defined as the highest or the lowest valu
 Many Priority Queues, including this one, are built on a Heap structure.  In so doing, the Priority Queue can 
 be considered as a one-step-at-a-time Heap Sort.  Enqueuing the elements of an unsorted list and then repeatedly Dequeuing until the Priority Queue is empty yields a sorted list.
 
+The PriorityQueue<T> class implements the IPriorityQueue<T> interface.  It will create a PriorityQueue of any type T that 
+implements the IComparable interface.  Fortunately, this includes native C# types such as int, double, and string.   It is highly recommended that class T also implement a meaningful ToString function.
+  
+
+
 Starting with ideas and code from Dr. James McCaffrey in a *Visual Studio Magazine* 
 [article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#"), and finding that 
 the sample code did not always dequeue in priority order, I consulted Donald Knuth's *Sorting and Searching* (Volume 3 of
@@ -26,9 +31,6 @@ if
 where *j* is the 1-based ordinal key position in the file or array. 
 To convert the 1-based ordinal key position to a 0-based array index, we simply subtract 1 from the ordinal.
 
-The PriorityQueue<T> class implements the IPriorityQueue<T> interface.  It will create a PriorityQueue of any type T that 
-implements the IComparable interface.  Fortunately, this includes native C# types such as int, double, and string.
-  
 
 &copy; 2020 Eugene C. Olsen
 
