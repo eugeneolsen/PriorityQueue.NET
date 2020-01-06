@@ -72,7 +72,7 @@ namespace EugeneOlsen.Collections.Generic
         }
 
 
-        public event EventHandler<QueueEmptyEventArgs> QueueEmptyEvent;
+        public event EventHandler<QueueEmptyEventArgs> QueueEmpty;
 
 
         IList<T> IPriorityQueue<T>.Items => base.Items;
@@ -197,10 +197,7 @@ namespace EugeneOlsen.Collections.Generic
 
             if (base.Count == 0)
             {
-                if (Diagnostics.On == Diagnostics)
-                {
-                    OnRaiseQueueEmptyEvent(new QueueEmptyEventArgs(_comparisons, _swaps));
-                }
+                OnRaiseQueueEmptyEvent(new QueueEmptyEventArgs(_comparisons, _swaps));
 
                 _swaps = 0;
                 _comparisons = 0;
@@ -313,7 +310,7 @@ namespace EugeneOlsen.Collections.Generic
 
         protected virtual void OnRaiseQueueEmptyEvent(QueueEmptyEventArgs e)
         {
-            EventHandler<QueueEmptyEventArgs> handler = QueueEmptyEvent;
+            EventHandler<QueueEmptyEventArgs> handler = QueueEmpty;
 
             handler?.Invoke(this, e);
         }

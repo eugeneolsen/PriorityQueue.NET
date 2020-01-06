@@ -6,7 +6,7 @@ namespace EugeneOlsen.Collections.Generic
 {
     public interface IPriorityQueue<T> : IBindingList where T : IComparable<T>
     {
-        event EventHandler<QueueEmptyEventArgs> QueueEmptyEvent;    // Fires when the Priority Queue is empty.
+        event EventHandler<QueueEmptyEventArgs> QueueEmpty;    // Fires when Dequeue empties the queue.
 
         void Enqueue(T item);   // Enqueues an item of class T onto the Priority Queue.
 
@@ -16,7 +16,7 @@ namespace EugeneOlsen.Collections.Generic
 
         bool IsEmpty { get; }   // Returns true if the queue is empty, otherwise, false.
 
-        Diagnostics Diagnostics { get; set; }   // Validates the underlying heap and returns statistics after the last dequeue.
+        Diagnostics Diagnostics { get; set; }   // If on, validates the underlying heap after each Enqueue and Dequeue.
 
         IList<T> Items { get; }     // Returns a list of items in the BindingList.  Used by DataGridView and other clients.
 
