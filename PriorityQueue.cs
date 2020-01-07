@@ -181,8 +181,11 @@ namespace EugeneOlsen.Collections.Generic
 
             T topItem = base[rootIndex];
 
-            Debug.WriteLine($"\nDequeuing Priority Item: {topItem.ToString()}");
-            Debug.WriteLine($"Moving {base[lastIndex].ToString()} to root");
+            if (Diagnostics.On == this.Diagnostics)
+            {
+                Debug.WriteLine($"\nDequeuing Priority Item: {topItem.ToString()}");
+                Debug.WriteLine($"Moving {base[lastIndex].ToString()} to root");
+            }
 
             base[rootIndex] = base[lastIndex];
 
@@ -261,7 +264,7 @@ namespace EugeneOlsen.Collections.Generic
 
             if (PriorityCompare(parentNode.CompareTo(leftChildNode)))
             {
-                if (Diagnostics.On == Diagnostics && base.Count < 32)
+                if (Diagnostics.On == this.Diagnostics && base.Count < 32)
                 {
                     Debug.WriteLine($"Swapping parent {parentNode.ToString()} with left child {leftChildNode.ToString()}");
                 }
@@ -282,7 +285,7 @@ namespace EugeneOlsen.Collections.Generic
 
             if (PriorityCompare(parentNode.CompareTo(rightChildNode)))
             {
-                if (Diagnostics.On == Diagnostics && base.Count < 32)
+                if (Diagnostics.On == this.Diagnostics && base.Count < 32)
                 {
                     Debug.WriteLine($"Swapping parent {parentNode.ToString()} with right child {rightChildNode.ToString()}");
                 }
