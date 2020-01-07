@@ -17,6 +17,15 @@ The type of the elements in the priority queue.
 
 # Examples
 
+```
+
+Example code coming soon!
+
+```
+
+
 # Remarks
 
 Use the properties, methods, and events of the IPriorityQueue&lt;T&gt; interface.
+
+The PriorityQueue&lt;T&gt; class inherits from BindingList&lt;T&gt; in order to automatically update DataGridView and similar bound clients.
