@@ -1,4 +1,4 @@
-# ProrityQueue Class
+# ProrityQueue&lt;T&gt; Class
 
 Namespace: EugeneOlsen.Collections.Generic<br>
 Assemblies: EugeneOlsen.Collections.Generic.PriorityQueue.dll
