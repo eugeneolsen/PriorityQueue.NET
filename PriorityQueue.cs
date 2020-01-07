@@ -261,7 +261,11 @@ namespace EugeneOlsen.Collections.Generic
 
             if (PriorityCompare(parentNode.CompareTo(leftChildNode)))
             {
-                Debug.WriteLine($"Swapping parent {parentNode.ToString()} with left child {leftChildNode.ToString()}");
+                if (Diagnostics.On == Diagnostics && base.Count < 32)
+                {
+                    Debug.WriteLine($"Swapping parent {parentNode.ToString()} with left child {leftChildNode.ToString()}");
+                }
+
                 SwapNodes(parentIndex, leftChildIndex);
 
                 Traverse(leftChild);
@@ -278,7 +282,11 @@ namespace EugeneOlsen.Collections.Generic
 
             if (PriorityCompare(parentNode.CompareTo(rightChildNode)))
             {
-                Debug.WriteLine($"Swapping parent {parentNode.ToString()} with right child {rightChildNode.ToString()}");
+                if (Diagnostics.On == Diagnostics && base.Count < 32)
+                {
+                    Debug.WriteLine($"Swapping parent {parentNode.ToString()} with right child {rightChildNode.ToString()}");
+                }
+
                 SwapNodes(parentIndex, rightChildIndex);
 
                 Traverse(rightChild);
