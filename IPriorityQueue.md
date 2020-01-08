@@ -25,28 +25,27 @@ Example code coming soon!
 
 # Properties
 
-T this[int index]
-
-int Count
-
-Diagnostics Diagnostics
-
-bool IsEmpty
-
-BindingList&lt;T&gt; SortedList
+Property | Description
+---|---
+T this[int index] | Returns the item in the list that underlies the priority queue at the specified index.
+int Count | Returns the number of items in the priority queue.
+Diagnostics Diagnostics | Gets or sets whether the heap that underlies the priority queue is validated after each Enqueue and Dequeue operation.  Diagnostics = Diagnostics.On adds over 100% performance degradation and should be used only for debugging.
+bool IsEmpty | Returns true if the priority queue is empty, otherwise false.
+BindingList&lt;T&gt; SortedList | Returns a list sorted in priority order and leaves the priority queue undisturbed.
 
 
 # Methods
 
-void Clear
-
-T Dequeue
-
-void Enqueue(T item)
-
-T Peek
+Method | Description
+---|---
+void Clear | Empties the priority queue.
+T Dequeue | Returns the top item in the priority queue and removes it from the queue.
+void Enqueue(T item) | Adds an item to the priority queue and reorders the underlying heap.
+T Peek | Returns the top item from the priority queue
 
 
 # Events
 
-QueueEmpty(QueueEmptyEventArgs)
+Event | Description
+---|---
+QueueEmpty(QueueEmptyEventArgs) | Occurs when Dequeue empties the priority queue. QueueEmptyEventArgs returns the number of compares made and the number of times queue members were swapped since the queue was last cleared.
