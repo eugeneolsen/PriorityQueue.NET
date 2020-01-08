@@ -17,6 +17,12 @@ The type of the elements in the priority queue.
 
 # Examples
 
+Two examples follow.  The first demonstrates basic usage of the PriorityQueue&;ltT&gt; class.  The second shows a more practical application: quickly and efficiently merging sorted arrays.
+
+Examples were created with Visual Studio 2019 targeting the .NET Framework 4.8.  
+
+### Basic Usage
+In this example, the higher customer number has the higher priority.  The PriorityQueue constructor specifies a priority queue with PriorityOrder.Descending.
 ```csharp
 
 using System;
@@ -35,7 +41,7 @@ namespace PriorityQueueExample
 
         static void Main(string[] args)
         {
-            IPriorityQueue<Customer> customerQueue = new PriorityQueue<Customer>(PriorityOrder.Ascending);
+            IPriorityQueue<Customer> customerQueue = new PriorityQueue<Customer>(PriorityOrder.Descending);
 
             customerQueue.QueueEmpty += OnQueueEmpty;
 
@@ -97,6 +103,68 @@ namespace PriorityQueueExample
         public new string ToString()
         {
             return $"Customer {ID}: {LastName}, {FirstName}";
+        }
+    }
+}
+```
+
+### Merge Sorted Arrays
+```csharp
+using System;
+using System.ComponentModel;
+
+using EugeneOlsen.Collections.Generic;
+
+namespace MergeSortedArrays
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[][] jaggedArray =
+            {
+                new int[] { 1, 3, 5, 7, 9 },
+                new int[] { 0, 2, 4, 6, 8, 10, 12 },
+                new int[] { 11, 22, 33, 44, 55},
+                new int[] { 3, 6, 9, 12, 15, 18, 21, 24},
+                new int[] { 7, 14, 21, 28, 35, 42}
+            };
+
+            IPriorityQueue<int> intQueue = new PriorityQueue<int>(PriorityOrder.Ascending);
+
+            int maxLength = 0;
+
+            foreach (var intArray in jaggedArray)
+            {
+                if (intArray.Length > maxLength) maxLength = intArray.Length;
+            }
+
+            int i = 0;
+
+            while (i < maxLength)
+            {
+                for (int j = 0; j < jaggedArray.Length; j++)
+                {
+                    if (i < jaggedArray[j].Length)
+                    {
+                        intQueue.Enqueue(jaggedArray[j][i]);
+                    }
+                }
+
+                i++;
+            }
+
+            BindingList<int> list = intQueue.SortedList;
+
+            foreach (int item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            intQueue.Clear();
+
+            Console.WriteLine("\n  Press any key to continue...");
+            _ = Console.ReadKey();
         }
     }
 }
