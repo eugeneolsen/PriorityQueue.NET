@@ -27,7 +27,7 @@ Example code coming soon!
 
 Property | Description
 ---|---
-T this[int index] | Returns the item in the list that underlies the priority queue at the specified index.
+T this[int index] | Returns the item in the list that underlies the priority queue at the specified zero-based index.
 int Count | Returns the number of items in the priority queue.  (Inherited from IList&lt;T&gt;.)
 Diagnostics Diagnostics | Gets or sets whether the heap that underlies the priority queue is validated after each Enqueue and Dequeue operation.  Diagnostics = Diagnostics.On adds over 100% performance degradation and should be used only for debugging.
 bool IsEmpty | Returns true if the priority queue is empty, otherwise false.
