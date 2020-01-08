@@ -25,13 +25,13 @@ the sample code did not always dequeue in priority order, I consulted Donald Knu
 
 Dr. McCaffrey's ideas for making the class generic work as expected.  His code for the Enqueue method was close; The Dequeue method was reworked entirely.
 
-Departing from Dr. McCaffrey's code, The parent-child relationships are calculated with ordinals rather than indices.  
+Departing from Dr. McCaffrey's code, The parent-child relationships in the PriorityQueue class are calculated with ordinals rather than indices.  
 Knuth defines a Heap structure as a file [or array] of keys, *K*<sub>1</sub>, *K*<sub>2</sub>, ..., *K*<sub>N</sub> 
 if 
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*K*<sub>[*j*/2]</sub> &le; *K*<sub>*j*</sub> for 1 &le; *j*/2 < *j* &le; N
 
-where *j* is the 1-based ordinal key position in the file or array. 
+where *j* is the 1-based ordinal key position in the file or array.  Note that the parent-child relationships in Dr. Knuth's method are defined by ordinal positions and not array indices.
 To convert the 1-based ordinal key position to a 0-based array index, we simply subtract 1 from the ordinal.
 
 <br>
