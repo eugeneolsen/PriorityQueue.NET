@@ -40,9 +40,9 @@ BindingList&lt;T&gt; SortedList | Returns a list sorted in priority order and le
 Method | Description
 ---|---
 void Clear | Empties the priority queue.
-T Dequeue | Returns the top item in the priority queue and removes it from the queue.
+T Dequeue | Returns the highest priority item in the priority queue and removes it from the queue.
 void Enqueue(T item) | Adds an item to the priority queue and reorders the underlying heap.
-T Peek | Returns the top item from the priority queue
+T Peek | Returns the highest priority item from the priority queue
 
 
 # Events
