@@ -42,7 +42,7 @@ Method | Description
 void Clear | Empties the priority queue.
 T Dequeue | Returns the highest priority item in the priority queue and removes it from the queue.
 void Enqueue(T item) | Adds an item to the priority queue and reorders the underlying heap.
-T Peek | Returns the highest priority item from the priority queue
+T Peek | Returns the highest priority item from the priority queue and leaves the queue undisturbed.
 
 
 # Events
