@@ -17,8 +17,36 @@ The type of the elements in the priority queue.
 
 # Examples
 
-```
+```csharp
 
 Example code coming soon!
 
 ```
+
+# Properties
+
+T this[int index]
+
+int Count
+
+Diagnostics Diagnostics
+
+bool IsEmpty
+
+BindingList&lt;T&gt; SortedList
+
+
+# Methods
+
+void Clear
+
+T Dequeue
+
+void Enqueue(T item)
+
+T Peek
+
+
+# Events
+
+QueueEmpty(QueueEmptyEventArgs)
