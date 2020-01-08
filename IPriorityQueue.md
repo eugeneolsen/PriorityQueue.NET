@@ -19,7 +19,80 @@ The type of the elements in the priority queue.
 
 ```csharp
 
-Example code coming soon!
+        using System;
+        using System.ComponentModel;
+
+        using EugeneOlsen.Collections.Generic;
+
+        namespace PriorityQueueExample
+        {
+            class Program
+            {
+                static void Main(string[] args)
+                {
+                    IPriorityQueue<Customer> customerQueue = new PriorityQueue<Customer>(PriorityOrder.Ascending);
+
+                    customerQueue.Enqueue(new Customer(401, "Wang", "Judy"));
+                    customerQueue.Enqueue(new Customer(3, "Singh", "Babaji"));
+                    customerQueue.Enqueue(new Customer(56, "Fernandez", "Guadalupe"));
+                    customerQueue.Enqueue(new Customer(42, "Adams", "Douglas"));
+                    customerQueue.Enqueue(new Customer(101, "de Vil", "Cruella"));
+                    customerQueue.Enqueue(new Customer(9, "van Beethoven", "Ludwig"));
+                    customerQueue.Enqueue(new Customer(256, "Cratchit", "Robert"));
+
+                    BindingList<Customer> customerList = customerQueue.SortedList;
+
+                    Console.WriteLine("Sorted list of customers:\n");
+
+                    foreach(var customer in customerList)
+                    {
+                        Console.WriteLine(customer.ToString());
+                    }
+
+                    Console.WriteLine("\n\nList of Dequeued customers:\n");
+
+                    while (!customerQueue.IsEmpty)
+                    {
+                        Customer customer = customerQueue.Dequeue();
+                        Console.WriteLine(customer.ToString());
+                    }
+
+                    Console.WriteLine("\n  Press any key to continue...");
+                    _ = Console.ReadKey();
+                }
+            }
+
+            /// <summary>
+            /// Very minimal Customer class
+            /// </summary>
+            class Customer : IComparable<Customer>
+            {
+                public Customer(int id, string lastName, string firstName)
+                {
+                    ID = id;
+                    LastName = lastName;
+                    FirstName = firstName;
+                }
+
+                int ID { get; }
+                string LastName { get; }
+                string FirstName { get; }
+
+                public int CompareTo(Customer other)
+                {
+                    if (this.ID > other.ID) return 1;
+
+                    if (this.ID < other.ID) return -1;
+
+                    return 0;
+                }
+
+                public new string ToString()
+                {
+                    return $"Customer {ID}: {LastName}, {FirstName}";
+                }
+            }
+        }
 
 ```
 
