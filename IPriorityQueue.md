@@ -139,9 +139,7 @@ namespace MergeSortedArrays
                 if (intArray.Length > maxLength) maxLength = intArray.Length;
             }
 
-            int i = 0;
-
-            while (i < maxLength)
+            for (int i = 0;  i < maxLength; i++)
             {
                 for (int j = 0; j < jaggedArray.Length; j++)
                 {
@@ -150,8 +148,6 @@ namespace MergeSortedArrays
                         intQueue.Enqueue(jaggedArray[j][i]);
                     }
                 }
-
-                i++;
             }
 
             BindingList<int> list = intQueue.SortedList;
