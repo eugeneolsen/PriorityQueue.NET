@@ -174,7 +174,7 @@ T this[int index] | Returns the item in the list that underlies the priority que
 int Count | Returns the number of items in the priority queue.  (Inherited from IList&lt;T&gt;.)
 Diagnostics Diagnostics | Gets or sets whether the heap structure that underlies the priority queue is validated after each Enqueue and Dequeue operation.  Diagnostics = Diagnostics.On adds over 100% performance degradation and should be used only for debugging.  It is a good practice to set the Diagnostics property to Diagnostics.On in Debug builds and Diagnostics.Off in Release builds in the constructor of concrete classes that inherit the IPriorityQueue&lt;T&gt; interface.
 bool IsEmpty | Returns true if the priority queue is empty, otherwise false.
-PriorityOrder&nbsp;PriorityOrder | Gets the order of the priority queue, either PriorityOrder.Ascending or PriorityOrder.Descending.  This priority order should be set in the constructor of concrete classes that inherit the IPriorityQueue&lt;T&gt; interface.
+PriorityOrder&nbsp;PriorityOrder | Gets the order of the priority queue, either PriorityOrder.Ascending or PriorityOrder.Descending.  This priority order should be passed to the constructor of concrete classes that inherit the IPriorityQueue&lt;T&gt; interface.  The default is PriorityOrder.Ascending.
 BindingList&lt;T&gt; SortedList | Returns a list of all priority queue items sorted in priority order and leaves the priority queue undisturbed.
 
 
