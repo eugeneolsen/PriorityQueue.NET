@@ -66,8 +66,9 @@ namespace PriorityQueueExample
 
             while (!customerQueue.IsEmpty)
             {
-                Customer customer = customerQueue.Dequeue();
-                Console.WriteLine(customer.ToString());
+                Console.WriteLine(customerQueue.Peek().ToString());
+
+                _ = customerQueue.Dequeue();
             }
 
             Console.WriteLine("\n  Press any key to continue...");
