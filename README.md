@@ -7,14 +7,17 @@ A Priority Queue is a data structure like a queue, with the additional feature t
 has a priority and the highest priority item in the queue is dequeued first, then the next highest priority,
 and so forth.  The top priority may be defined as the highest or the lowest value.
 
+For a partial list of practical applications for priority queues, please see the Applications section of the Wikipedia article [Priority queues](https://en.wikipedia.org/wiki/Priority_queue#Applications).
+
 Many Priority Queues, including this one, are built on a Heap structure.  In so doing, the Priority Queue can 
 be considered as a one-step-at-a-time Heap Sort.  Enqueuing the elements of an unsorted list and then repeatedly Dequeuing until the Priority Queue is empty yields a sorted list.
 
 The PriorityQueue<T> class implements the IPriorityQueue<T> interface.  It will create a PriorityQueue of any type T that 
 implements the IComparable interface.  Fortunately, this includes native C# types such as int, double, and string.   It is highly recommended that class T also implement a meaningful ToString function.
   
+For documentation, examples, and usage notes, please see [IPriorityQueue.md](IPriorityQueue.md).
 
-
+#### Implementation Thought Processes
 Starting with ideas and code from Dr. James McCaffrey in a *Visual Studio Magazine* 
 [article](https://visualstudiomagazine.com/Articles/2012/11/01/Priority-Queues-with-C.aspx?Page=1 "Priority Queues with C#"), and finding that 
 the sample code did not always dequeue in priority order, I consulted Donald Knuth's *Sorting and Searching* (Volume 3 of
@@ -22,13 +25,13 @@ the sample code did not always dequeue in priority order, I consulted Donald Knu
 
 Dr. McCaffrey's ideas for making the class generic work as expected.  His code for the Enqueue method was close; The Dequeue method was reworked entirely.
 
-Departing from Dr. McCaffrey's code, The parent-child relationships are calculated with ordinals rather than indices.  
+Departing from Dr. McCaffrey's code, The parent-child relationships in the PriorityQueue class are calculated with ordinals rather than indices.  
 Knuth defines a Heap structure as a file [or array] of keys, *K*<sub>1</sub>, *K*<sub>2</sub>, ..., *K*<sub>N</sub> 
 if 
 
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*K*<sub>[*j*/2]</sub> &le; *K*<sub>*j*</sub> for 1 &le; *j*/2 < *j* &le; N
 
-where *j* is the 1-based ordinal key position in the file or array. 
+where *j* is the 1-based ordinal key position in the file or array.  Note that the parent-child relationships in Dr. Knuth's method are defined by ordinal positions and not array indices.
 To convert the 1-based ordinal key position to a 0-based array index, we simply subtract 1 from the ordinal.
 
 <br>
