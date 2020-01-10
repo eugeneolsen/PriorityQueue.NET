@@ -63,6 +63,8 @@ namespace EugeneOlsen.Collections.Generic
         {
             PriorityOrder = priorityQueue.PriorityOrder;
 
+            Diagnostics = priorityQueue.Diagnostics;
+
             base.RaiseListChangedEvents = false;       // Raise ListChanged events manually when Enqueue and Dequeue are complete.
 
             foreach (T item in priorityQueue.Items)
@@ -74,8 +76,6 @@ namespace EugeneOlsen.Collections.Generic
 
         public event EventHandler<QueueEmptyEventArgs> QueueEmpty;
 
-
-        IList<T> IPriorityQueue<T>.Items => base.Items;
 
         public bool IsEmpty { get => base.Count == 0; }
 
