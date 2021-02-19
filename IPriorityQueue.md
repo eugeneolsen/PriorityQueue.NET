@@ -17,7 +17,7 @@ The type of the elements in the priority queue.
 
 # Examples
 
-Two examples follow.  The first demonstrates basic usage of the PriorityQueue&;ltT&gt; class.  The second shows a more practical application: quickly and efficiently merging sorted arrays.
+Two examples follow.  The first demonstrates basic usage of the PriorityQueue&lt;T&gt; class.  The second shows a more practical application: quickly and efficiently merging sorted arrays.
 
 Examples were created with Visual Studio 2019 targeting the .NET Framework 4.8.  
 
